@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getUrl } = require("../../controllers/video.js");
+const { getUrl } = require("../../controllers/video-fire.js");
 const router = Router();
 // este modulo inicializa firebase
 const admin = require("./admin-firebase.js");
