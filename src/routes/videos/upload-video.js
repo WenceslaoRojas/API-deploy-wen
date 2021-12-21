@@ -4,7 +4,7 @@ const {
   merge,
   upload,
   deleteVideo,
-} = require("../../controllers/video.js");
+} = require("../../controllers/video");
 const { sendMail } = require("../../controllers/email.js");
 const router = Router();
 // este modulo inicializa firebase
