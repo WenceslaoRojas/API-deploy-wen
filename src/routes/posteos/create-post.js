@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
         .status(404)
         .send({ msg: `No se encontró la conductor: ${driver}` });
 
-    const post = await Post.create({
+    const postCreated = await Post.create({
       date: date,
       roadMap: roadMap,
       origin: origin,
@@ -61,9 +61,12 @@ router.post("/", async (req, res) => {
       author: operator,
     });
 
-    await foundUser.addPost(post);
-    await foundDriver.addPost(post);
-    await foundLicense.addPost(post);
+    const foundUserByPk = await User.findByPk(foundUser.id);
+    const foundDriverByPk = await Driver.findByPk(foundDriver.id);
+    const foundLicenseByPk = await LicensePlate.findByPk(foundLicense.id);
+    await postCreated.setUser(foundUserByPk);
+    await postCreated.setDriver(foundDriverByPk);
+    await postCreated.setLicensePlate(foundLicenseByPk);
     res.status(201).json({
       msg: "Post Was successfully created",
     });

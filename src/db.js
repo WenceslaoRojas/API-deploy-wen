@@ -28,7 +28,7 @@ fs.readdirSync(path.join(__dirname, "/Models"))
     modelDefiners.push(require(path.join(__dirname, "/Models", file)));
   });
 
-// Injectamos la conexión (sequelize) a todos los modelos
+// Inyectamos la conexión (sequelize) a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models);
@@ -39,14 +39,14 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 //Para relacionarlos hacemos un destructuring
-const { User, LicensePlate, Post, Driver } = sequelize.models;
+const { User, LicensePlate, Post, Driver, Historial } = sequelize.models;
 
-// Acá vendrían las relacionUser.belongsToMany(Post, {
-User.belongsToMany(Post, { through: "user_post" });
-Driver.belongsToMany(Post, { through: "driver_post" });
-LicensePlate.belongsToMany(Post, { through: "license_post" });
+// Acá vendrían las relaciones
+Post.belongsTo(User);
+Post.belongsTo(Driver);
+Post.belongsTo(LicensePlate);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  conn: sequelize, // para importar la conexión { conn } = require('./db.js');
 };
