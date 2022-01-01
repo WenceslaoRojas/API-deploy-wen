@@ -3,14 +3,12 @@ const router = Router();
 
 /* --------------------------------USERS-------------------------------- */
 const user = require("./users/create-user");
-const modify = require("./users/update-pass");
 const deleted = require("./users/delete-user");
 // const typeUser = require("./Users/typeUser");  EN DESUSO 18/12 Para borrar?
 const listUser = require("./users/list-user");
 const updatePass = require("./users/update-pass");
 const updateEmail = require("./users/update-email");
 router.use("/user/create", user);
-router.use("/user/update", modify);
 router.use("/user/delete", deleted);
 router.use("/user/list", listUser);
 router.use("/user/update/passWord", updatePass);

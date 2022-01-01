@@ -8,7 +8,7 @@ router.put("/", async function (req, res) {
       { active: false },
       {
         where: {
-          user: req.body.user,
+          user: req.body.username,
         },
       }
     );

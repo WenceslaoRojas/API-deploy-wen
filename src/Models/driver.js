@@ -22,5 +22,12 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: true,
     },
+    postId: {
+      type: DataTypes.UUID,
+      references: {
+        model: "Post",
+        key: "id",
+      },
+    },
   });
 };

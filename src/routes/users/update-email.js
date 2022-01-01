@@ -4,7 +4,7 @@ const { User } = require("../../db.js");
 
 router.post("/", async (req, res) => {
   try {
-    const { username, correo } = req.body;
+    const { username, email } = req.body;
 
     const user = await User.findOne({
       where: {
@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
       throw "Username does not exist.";
     }
 
-    await user.update({ email: correo });
+    await user.update({ email: email });
 
     await user.save();
 
