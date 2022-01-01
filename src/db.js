@@ -41,31 +41,43 @@ sequelize.models = Object.fromEntries(capsEntries);
 //Para relacionarlos hacemos un destructuring
 const { User, LicensePlate, Post, Driver } = sequelize.models;
 
-// Acá vendrían las relaciones
-User.belongsToMany(Post, {
-  foreignKey: {
-    fieldName: "postId",
-    allowNull: true,
-    require: true,
-  },
-  targetKey: "id",
-});
-Driver.belongsToMany(Post, {
-  foreignKey: {
-    fieldName: "postId",
-    allowNull: true,
-    require: true,
-  },
-  targetKey: "id",
-});
-LicensePlate.belongsToMany(Post, {
-  foreignKey: {
-    fieldName: "postId",
-    allowNull: true,
-    require: true,
-  },
-  targetKey: "id",
-});
+// Acá vendrían las relacionUser.belongsToMany(Post, {
+User.belongsToMany(
+  Post,
+  { through: "user_post" },
+  {
+    foreignKey: {
+      fieldName: "postId",
+      allowNull: true,
+      require: true,
+    },
+    targetKey: "id",
+  }
+);
+Driver.belongsToMany(
+  Post,
+  { through: "driver_post" },
+  {
+    foreignKey: {
+      fieldName: "postId",
+      allowNull: true,
+      require: true,
+    },
+    targetKey: "id",
+  }
+);
+LicensePlate.belongsToMany(
+  Post,
+  { through: "license_post" },
+  {
+    foreignKey: {
+      fieldName: "postId",
+      allowNull: true,
+      require: true,
+    },
+    targetKey: "id",
+  }
+);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
