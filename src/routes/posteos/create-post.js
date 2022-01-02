@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     operator,
   } = req.body;
   if (
-    !user ||
+    !username ||
     !date ||
     !roadMap ||
     !origin ||
