@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
       return res.send("user must only have numbers and letters");
     }
 
-    let [instanceUser, userCreated] = await User.findOrCreate({
+    let [instanceUser, Created] = await User.findOrCreate({
       where: { user: username },
       defaults: {
         user: username,
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
       },
     });
 
-    if (userCreated) {
+    if (Created) {
       try {
         // envío mail confirmación
         let respMail = await sendMail(
@@ -53,7 +53,30 @@ router.post("/", async (req, res) => {
           .send({ err: "User Created, Failed to send email" });
       }
     }
-
+    if (instanceUser.dataValues.active === false) {
+      await instanceUser.update({
+        active: true,
+        password: pass,
+        email: email,
+        admin: admin,
+      });
+      try {
+        // envío mail confirmación
+        let respMail = await sendMail(
+          instanceUser.email,
+          "Usuario creado",
+          "Su usuario en MGF Logística se ha creado con éxito"
+        );
+        return res
+          .status(201)
+          .send({ msg: "User created successfully", email: respMail });
+      } catch (err) {
+        console.log(err);
+        return res
+          .status(404)
+          .send({ err: "User Created, Failed to send email" });
+      }
+    }
     res.status(200).json({ msg: "User already exists, try another name" });
   } catch (err) {
     console.log(err);

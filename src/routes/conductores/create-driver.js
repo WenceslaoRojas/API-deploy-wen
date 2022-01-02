@@ -19,9 +19,16 @@ router.post("/", async (req, res) => {
         dni: dni,
       },
     });
-
     if (created) {
-      return res.status(201).json({ msg: "Successfully created " });
+      return res.status(201).json({ msg: "Successfully created" });
+    }
+
+    if (driver.dataValues.active === false) {
+      await driver.update({
+        active: true,
+        name: name,
+      });
+      return res.status(201).json({ msg: "Successfully, driver reactivated" });
     }
 
     res
