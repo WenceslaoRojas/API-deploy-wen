@@ -39,7 +39,7 @@ server.post("/login", async (req, res) => {
         check: true,
       };
       const token = createToken.sign(payload, server.get("llave"), {
-        expiresIn: "2 days",
+        expiresIn: 1440,
       });
       res.json({
         mensaje: "Autenticación correcta",
@@ -72,7 +72,7 @@ auth.use(function (req, res, next) {
 });
 
 //ruta para ignorar middleware
-// server.use("/", routes);
+//server.use("/", routes);
 
 //ruta para probar token jwt
 server.use("/", auth, routes);
@@ -80,7 +80,7 @@ server.use("/", auth, routes);
 //ruta para probar refresh api token
 // server.use("/", authenticationToken, routes);
 
-//ruta ambos middleware
+//ruta ambos middlewares
 // server.use("/", [auth, authenticationToken], routes);
 
 module.exports = server;
