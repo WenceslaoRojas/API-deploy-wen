@@ -5,7 +5,7 @@ var bcrypt = require("bcryptjs");
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const { user, email, admin, password } = req.body;
+  const { username, email, admin, password } = req.body;
 
   try {
     if (

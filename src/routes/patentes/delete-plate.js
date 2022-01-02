@@ -3,12 +3,13 @@ const router = Router();
 const { LicensePlate } = require("../../db.js");
 
 router.put("/", async function (req, res) {
+  const { name } = req.body;
   try {
     await LicensePlate.update(
       { active: false },
       {
         where: {
-          license: req.body.name,
+          license: name,
         },
       }
     );

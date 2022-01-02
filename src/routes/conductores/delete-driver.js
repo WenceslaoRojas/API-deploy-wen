@@ -3,13 +3,14 @@ const router = Router();
 const { Driver } = require("../../db.js");
 
 router.put("/", async function (req, res) {
+  const { name, dni } = req.body;
   try {
     await Driver.update(
       { active: false },
       {
         where: {
-          name: req.body.name,
-          dni: req.body.dni,
+          name: name,
+          dni: dni,
         },
       }
     );

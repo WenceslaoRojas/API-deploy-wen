@@ -3,12 +3,13 @@ const router = Router();
 const { User } = require("../../db.js");
 
 router.put("/", async function (req, res) {
+  const { username } = req.body;
   try {
     await User.update(
       { active: false },
       {
         where: {
-          user: req.body.username,
+          user: username,
         },
       }
     );

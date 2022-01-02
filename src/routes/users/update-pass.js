@@ -14,7 +14,7 @@ router.put("/", async (req, res) => {
     });
 
     if (!user) {
-      return res.send "Username does not exist.";
+      return res.send("Username does not exist.");
     }
     if (
       !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(

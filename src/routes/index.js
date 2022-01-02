@@ -69,12 +69,11 @@ const url = require("./videos/url-video");
 router.use("/video/upload", upload);
 router.use("/video/URL", url);
 
-/* --------------------------------Video-------------------------------- */.
+/* --------------------------------Video-------------------------------- */
 
 /* --------------------------------Analytic-------------------------------- */
 const analyticReport = require("./analytic/analytical-report");
 router.use("/analytic/analytical-report", analyticReport);
 /* --------------------------------Analytic-------------------------------- */
-
 
 module.exports = router;
