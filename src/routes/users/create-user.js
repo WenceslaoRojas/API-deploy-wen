@@ -64,8 +64,8 @@ router.post("/", async (req, res) => {
         // envío mail confirmación
         let respMail = await sendMail(
           instanceUser.email,
-          "Usuario creado",
-          "Su usuario en MGF Logística se ha creado con éxito"
+          `Usuario: ${username} creado - MGF Logística`,
+          `Su usuario: ${username} con la contraseña: ${password} se ha creado con éxito en MGF Logística`
         );
         return res
           .status(201)
