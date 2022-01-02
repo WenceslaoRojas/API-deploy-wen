@@ -21,7 +21,7 @@ router.get("/", async function (req, res) {
     res.send(postList);
   } catch (err) {
     console.log(err);
-    res.status(509).send({ error: err });
+    res.status(509).send({ error: err, message: "fallo desde la ruta" });
   }
 });
 

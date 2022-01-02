@@ -21,7 +21,10 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true,
+    },totalReports: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
     },
-    
   });
 };

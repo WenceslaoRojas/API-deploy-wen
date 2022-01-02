@@ -18,5 +18,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: true,
     },
+    totalReports: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
   });
 };

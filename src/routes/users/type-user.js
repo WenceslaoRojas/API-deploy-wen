@@ -14,7 +14,7 @@ router.get("/", async function (req, res) {
       res
         .status(200)
         .send({ name: instanceUser.name, type: instanceUser.admin });
-    else res.status(500).send({ msg: "usuario no encontrado" });
+    else res.status(500).send({ msg: "user not found" });
   } catch (err) {
     res.status(500).send({ err });
   }

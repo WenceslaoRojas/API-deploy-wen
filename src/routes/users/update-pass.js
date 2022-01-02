@@ -14,14 +14,14 @@ router.put("/", async (req, res) => {
     });
 
     if (!user) {
-      throw "Username does not exist.";
+      return res.send "Username does not exist.";
     }
     if (
       !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
         password
       )
     ) {
-      throw new Error(
+      return res.send(
         "Password must have at least 8 chars 1 Uppercase, 1 lowercase,1 number and 1 special character."
       );
     }

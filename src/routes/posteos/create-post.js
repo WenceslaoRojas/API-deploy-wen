@@ -41,15 +41,15 @@ router.post("/", async (req, res) => {
       where: { name: licensePlate },
     });
     if (!foundUser)
-      return res.status(404).send({ msg: `No se encontró el user: ${user}` });
+      return res.status(404).send({ msg: `${user} not found` });
     if (!foundLicense)
       return res
         .status(404)
-        .send({ msg: `No se encontró la patente: ${licensePlate}` });
+        .send({ msg: `${licensePlate} not found` });
     if (!foundDriver)
       return res
         .status(404)
-        .send({ msg: `No se encontró la conductor: ${driver}` });
+        .send({ msg: `${driver} not found` });
 
     const postCreated = await Post.create({
       date: date,

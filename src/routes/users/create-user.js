@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
         password
       )
     ) {
-      throw new Error(
+      return res.send(
         "Password must have at least 8 chars 1 Uppercase, 1 lowercase,1 number and 1 special character"
       );
     }
@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     let pass = bcrypt.hashSync(password, salt);
 
     if (!/^[a-zA-Z0-9]+$/.test(user)) {
-      throw new Error("user must only have numbers and letters");
+      return res.send("user must only have numbers and letters");
     }
 
     let [instanceUser, userCreated] = await User.findOrCreate({
@@ -50,11 +50,11 @@ router.post("/", async (req, res) => {
         console.log(err);
         return res
           .status(404)
-          .send({ err: "Usuario Creado, Fallo en  envío de email" });
+          .send({ err: "User Created, Failed to send email" });
       }
     }
 
-    res.status(200).json({ msg: "El usuario ya existe, prueba otro nombre" });
+    res.status(200).json({ msg: "User already exists, try another name" });
   } catch (err) {
     console.log(err);
     res.status(404).send(err);

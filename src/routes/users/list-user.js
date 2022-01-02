@@ -14,7 +14,7 @@ router.get("/", async function (req, res) {
     let userInstance = [];
 
     if (userAdminInstance === null) {
-      return res.status(500).send({ err: "usuario no existe" });
+      return res.status(500).send({ err: "user does not exist" });
     } //si es sa vera todos los usuarios que no sean el
     else if (userAdminInstance.admin === "sa") {
       userInstance = await User.findAll({
@@ -34,7 +34,7 @@ router.get("/", async function (req, res) {
         active: true,
       });
     } else {
-      return res.status(400).send({ msg: "Usuario no es admin" });
+      return res.status(400).send({ msg: "User is not admin" });
     }
     //creamos el json para mandar
     let userJSON = userInstance.map((el) => {
