@@ -21,14 +21,14 @@ router.post("/", async (req, res) => {
     let salt = bcrypt.genSaltSync(10);
     let pass = bcrypt.hashSync(password, salt);
 
-    if (!/^[a-zA-Z0-9]+$/.test(user)) {
+    if (!/^[a-zA-Z0-9]+$/.test(username)) {
       return res.send("user must only have numbers and letters");
     }
 
     let [instanceUser, userCreated] = await User.findOrCreate({
-      where: { user: user },
+      where: { user: username },
       defaults: {
-        user: user,
+        user: username,
         password: pass,
         email: email,
         admin: admin,
@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
         return res
           .status(201)
           .send({ msg: "User created successfully", email: respMail });
-      } catch (err){
+      } catch (err) {
         console.log(err);
         return res
           .status(404)
