@@ -15,19 +15,19 @@ router.get("/", async (req, res) => {
     const maxLicense = await LicensePlate.max("totalReports", {
       where: { active: true },
     });
-    const userOfMax = await User.findAll({ where: { totalReports: maxUser } });
-    const driverOfMax = await Driver.findAll({
+    const userOfMax = await User.findOne({ where: { totalReports: maxUser } });
+    const driverOfMax = await Driver.findOne({
       where: { totalReports: maxDriver },
     });
-    const licenseOfMax = await LicensePlate.findAll({
+    const licenseOfMax = await LicensePlate.findOne({
       where: { totalReports: maxLicense },
     });
 
     const report = [
       { totalReports: listPost.length },
-      { driver: driverOfMax },
-      { user: userOfMax },
-      { license: licenseOfMax },
+      { driver: { name: driverOfMax.name } },
+      { user: { user: userOfMax.user } },
+      { license: { name: licenseOfMax.name } },
     ];
     return res.send(report);
   } catch (err) {
