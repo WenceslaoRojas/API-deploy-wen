@@ -56,13 +56,25 @@ router.post("/", async (req, res) => {
       arrivalTime: arrivalTime,
       author: operator,
     });
-
+    /*------------------------------------ Set ForeignKey ------------------------------------*/
     const foundUserByPk = await User.findByPk(foundUser.id);
     const foundDriverByPk = await Driver.findByPk(foundDriver.id);
     const foundLicenseByPk = await LicensePlate.findByPk(foundLicense.id);
     await postCreated.setUser(foundUserByPk);
     await postCreated.setDriver(foundDriverByPk);
     await postCreated.setLicensePlate(foundLicenseByPk);
+    /*------------------------------------ Set ForeignKey ------------------------------------*/
+    /*------------------------------------ Set Historial ------------------------------------*/
+    await foundUser.update({
+      totalReports: foundUser.totalReports + 1,
+    });
+    await foundDriver.update({
+      totalReports: foundUser.totalReports + 1,
+    });
+    await foundLicense.update({
+      totalReports: foundUser.totalReports + 1,
+    });
+    /*------------------------------------ Set Historial ------------------------------------*/
     res.status(201).json({
       msg: "Post Was successfully created",
     });
