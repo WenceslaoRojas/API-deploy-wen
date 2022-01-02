@@ -8,10 +8,11 @@ const indexUserModel = require("./src/db.js");
 const server = express();
 const routes = require("./src/routes/index");
 // const authenticationToken = require("./src/controllers/token-jimi");
+const { JWT } = process.env;
 
 server.use(express.urlencoded({ extended: true }));
 const auth = express();
-server.set("llave", process.env.JWT);
+server.set("llave", JWT);
 
 server.use(cors());
 server.use(morgan("dev"));
