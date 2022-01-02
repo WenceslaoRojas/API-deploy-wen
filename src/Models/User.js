@@ -31,10 +31,10 @@ module.exports = (sequelize) => {
         defaultValue: true,
       },
       totalReports: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
-    },
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
     },
     {
       timestamps: false,

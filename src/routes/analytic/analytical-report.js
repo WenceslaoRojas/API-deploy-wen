@@ -23,12 +23,12 @@ router.get("/", async (req, res) => {
       where: { totalReports: maxLicense },
     });
 
-    const report = {
-      totalReports: listPost.length,
-      driver: driverOfMax,
-      user: userOfMax,
-      license: licenseOfMax,
-    };
+    const report = [
+      { totalReports: listPost.length },
+      { driver: driverOfMax },
+      { user: userOfMax },
+      { license: licenseOfMax },
+    ];
     return res.send(report);
   } catch (err) {
     console.log(err);
