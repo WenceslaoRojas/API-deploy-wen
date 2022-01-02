@@ -5,7 +5,7 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   const {
-    user,
+    username,
     date,
     roadMap,
     origin,
@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
     return res.status(200).send({ msg: "faltan campos por rellenar" });
   try {
     const foundUser = await User.findOne({
-      where: { user: user },
+      where: { user: username },
     });
 
     const foundDriver = await Driver.findOne({
@@ -41,15 +41,11 @@ router.post("/", async (req, res) => {
       where: { name: licensePlate },
     });
     if (!foundUser)
-      return res.status(404).send({ msg: `${user} not found` });
+      return res.status(404).send({ msg: `${username} not found` });
     if (!foundLicense)
-      return res
-        .status(404)
-        .send({ msg: `${licensePlate} not found` });
+      return res.status(404).send({ msg: `${licensePlate} not found` });
     if (!foundDriver)
-      return res
-        .status(404)
-        .send({ msg: `${driver} not found` });
+      return res.status(404).send({ msg: `${driver} not found` });
 
     const postCreated = await Post.create({
       date: date,

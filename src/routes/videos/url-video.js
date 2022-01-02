@@ -9,8 +9,7 @@ router.get("/", async (req, res) => {
   //se trae el nombre por query y se trae la url del video
   let url = await getUrl(name, admin);
 
-  if (url === 505)
-    return res.status(506).send("No se encontro el video en Firebas");
+  if (url === 505) return res.status(506).send("Video not found in Firebas");
 
   res.status(200).send({ url });
 });
