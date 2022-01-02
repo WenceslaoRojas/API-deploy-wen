@@ -11,8 +11,8 @@ const routes = require("./src/routes/index");
 const { JWT } = process.env;
 
 server.use(express.urlencoded({ extended: true }));
-const auth = express();
 server.set("llave", JWT);
+const auth = express();
 
 server.use(cors());
 server.use(morgan("dev"));
@@ -28,47 +28,57 @@ server.use((err, req, res, next) => {
 });
 
 server.post("/login", async (req, res) => {
-  let instanceUser = await indexUserModel.User.findOne({
-    where: { user: req.body.username },
-  });
+  try {
+    let instanceUser = await indexUserModel.User.findOne({
+      where: { user: req.body.username },
+    });
 
-  if (instanceUser === null) {
-    res.send({ msg: "Usuario no encontrado" });
-  } else {
-    if (bcrypt.compareSync(req.body.password, instanceUser.password)) {
-      const payload = {
-        check: true,
-      };
-      const token = createToken.sign(payload, server.get("llave"), {
-        expiresIn: 1440,
-      });
-      res.json({
-        mensaje: "Autenticación correcta",
-        token: token,
-        type: instanceUser.admin,
-      });
+    if (instanceUser === null) {
+      res.send({ msg: "Usuario no encontrado" });
     } else {
-      res.json({ msg: "Contraseña incorrectos" });
+      if (bcrypt.compareSync(req.body.password, instanceUser.password)) {
+        const payload = {
+          check: true,
+        };
+        const token = createToken.sign(payload, server.get("llave"), {
+          expiresIn: 1440,
+        });
+        res.json({
+          mensaje: "Autenticación correcta",
+          token: token,
+          type: instanceUser.admin,
+        });
+      } else {
+        res.json({ msg: "Contraseña incorrectos" });
+      }
     }
+  } catch (err) {
+    console.log(err);
+    res.status(404).send({ error: err });
   }
 });
 
 auth.use(function (req, res, next) {
   const token = req.headers["access-token"];
 
-  if (token) {
-    createToken.verify(token, server.get("llave"), (err, decoded) => {
-      if (err) {
-        return res.json({ mensaje: "Token inválida" });
-      } else {
-        req.decoded = decoded;
-        next();
-      }
-    });
-  } else {
-    res.send({
-      mensaje: "No se obtuvo token.",
-    });
+  try {
+    if (token) {
+      createToken.verify(token, server.get("llave"), (err, decoded) => {
+        if (err) {
+          return res.json({ mensaje: "Token inválida" });
+        } else {
+          req.decoded = decoded;
+          next();
+        }
+      });
+    } else {
+      res.send({
+        mensaje: "No se obtuvo token.",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(404).send({ error: err });
   }
 });
 
