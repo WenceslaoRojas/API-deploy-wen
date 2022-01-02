@@ -4,7 +4,7 @@ const { Driver } = require("../../db.js");
 
 router.get("/", async function (req, res) {
   try {
-    let drivers = await Driver.findAll();
+    let drivers = await Driver.findAll({ where: { active: true } });
 
     res.json(drivers);
   } catch (err) {

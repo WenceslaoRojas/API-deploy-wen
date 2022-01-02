@@ -12,7 +12,7 @@ router.put("/", async function (req, res) {
         },
       }
     );
-    res.status(200).send({ msg: "Usuario eliminado con exito" });
+    res.status(200).send({ msg: "Usuario eliminado con éxito" });
   } catch (err) {
     res.status(500).send({ err });
   }

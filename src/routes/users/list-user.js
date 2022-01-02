@@ -22,6 +22,7 @@ router.get("/", async function (req, res) {
           admin: {
             [Op.not]: "sa",
           },
+          active: true,
         },
       });
     } //si es admin vera solo usuarios
@@ -30,6 +31,7 @@ router.get("/", async function (req, res) {
         where: {
           admin: "usuario",
         },
+        active: true,
       });
     } else {
       return res.status(400).send({ msg: "Usuario no es admin" });

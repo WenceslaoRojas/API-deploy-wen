@@ -8,7 +8,8 @@ router.put("/", async function (req, res) {
       { active: false },
       {
         where: {
-          name: req.body.driver,
+          name: req.body.name,
+          dni: req.body.dni,
         },
       }
     );

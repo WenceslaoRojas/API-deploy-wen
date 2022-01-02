@@ -3,7 +3,7 @@ const router = Router();
 const bcrypt = require("bcryptjs");
 const { User } = require("../../db.js");
 
-router.post("/", async (req, res) => {
+router.put("/", async (req, res) => {
   try {
     const { username, password } = req.body;
 

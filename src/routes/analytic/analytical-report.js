@@ -1,10 +1,16 @@
 const { Router } = require("express");
 const router = Router();
-const { LicensePlate } = require("../../db.js");
+const { Post } = require("../../db.js");
 
 router.get("/", async (req, res) => {
   try {
-    let Licenses = await LicensePlate.findAll({ where: { active: true } });
+    let listPost = await Post.findAll();
+let maxUser = await User.max('id', {where : {'totalReport': 342 }})
+
+
+    const report = {
+      totalReports: listPost.length,
+    };
     return res.json(Licenses);
   } catch (err) {
     res.status(500).send({ err });

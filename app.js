@@ -80,7 +80,7 @@ server.use("/", auth, routes);
 //ruta para probar refresh api token
 // server.use("/", authenticationToken, routes);
 
-//ruta ambos middlewares
+//ruta ambos middleware
 // server.use("/", [auth, authenticationToken], routes);
 
 module.exports = server;
