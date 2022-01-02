@@ -9,7 +9,7 @@ router.put("/", async function (req, res) {
       { active: false },
       {
         where: {
-          license: name,
+          name: name,
         },
       }
     );

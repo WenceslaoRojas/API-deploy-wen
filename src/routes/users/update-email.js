@@ -18,12 +18,9 @@ router.put("/", async (req, res) => {
 
     await user.update({ email: email });
 
-    await user.save();
-
-    if (user.password === pass) {
-      return res.status(200).send("Password modified.");
-    }
+    return res.status(200).send("email modified.");
   } catch (err) {
+    console.error(err);
     res.status(404).send(err);
   }
 });
