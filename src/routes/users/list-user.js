@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const { Op } = require("sequelize");
-const { User,  } = require("../../db.js");
+const { User } = require("../../db.js");
 
 router.get("/", async function (req, res) {
   const { username } = req.query;
@@ -31,8 +31,8 @@ router.get("/", async function (req, res) {
       userInstance = await User.findAll({
         where: {
           admin: "usuario",
+          active: true,
         },
-        active: true,
       });
     } else {
       return res.status(400).send({ msg: "User is not admin" });
