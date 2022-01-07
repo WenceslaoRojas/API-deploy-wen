@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
         let respMail = await sendMail(
           instanceUser.email,
           `Usuario: ${username} creado - MGF Logística`,
-          `Su usuario: ${username} con la contraseña: ${password} se ha creado con éxito en MGF Logística`
+          `Su usuario: ${username} con la contraseña: ${password} se ha creado con éxito en MGF Logística, lo invitamos a revisar en la web https://jolly-banach-ec803d.netlify.app/`
         );
         return res
           .status(201)
@@ -65,7 +65,7 @@ router.post("/", async (req, res) => {
         let respMail = await sendMail(
           instanceUser.email,
           `Usuario: ${username} creado - MGF Logística`,
-          `Su usuario: ${username} con la contraseña: ${password} se ha creado con éxito en MGF Logística`
+          `Su usuario: ${username} con la contraseña: ${password} se ha creado con éxito en MGF Logística, lo invitamos a revisar en la web https://jolly-banach-ec803d.netlify.app/`
         );
         return res
           .status(201)

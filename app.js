@@ -34,7 +34,7 @@ server.post("/login", async (req, res) => {
     });
 
     if (instanceUser === null) {
-      res.send({ msg: "Usuario no encontrado" });
+      res.send({ msg: "User not found" });
     } else {
       if (bcrypt.compareSync(req.body.password, instanceUser.password)) {
         const payload = {
@@ -44,12 +44,12 @@ server.post("/login", async (req, res) => {
           expiresIn: "1 days",
         });
         res.json({
-          mensaje: "Autenticación correcta",
+          mensaje: "Successful authentication",
           token: token,
           type: instanceUser.admin,
         });
       } else {
-        res.json({ msg: "Contraseña incorrectos" });
+        res.json({ msg: "Incorrect password" });
       }
     }
   } catch (err) {
@@ -65,7 +65,7 @@ auth.use(function (req, res, next) {
     if (token) {
       createToken.verify(token, server.get("llave"), (err, decoded) => {
         if (err) {
-          return res.json({ mensaje: "Token inválida" });
+          return res.json({ mensaje: "Invalid Token" });
         } else {
           req.decoded = decoded;
           next();
@@ -73,7 +73,7 @@ auth.use(function (req, res, next) {
       });
     } else {
       res.send({
-        mensaje: "No se obtuvo token.",
+        mensaje: "Token not obtained.",
       });
     }
   } catch (err) {
@@ -86,12 +86,12 @@ auth.use(function (req, res, next) {
 //server.use("/", routes);
 
 //ruta para probar token jwt
-server.use("/", auth, routes);
+// server.use("/", auth, routes);
 
 //ruta para probar refresh api token
 // server.use("/", authenticationToken, routes);
 
 //ruta ambos middlewares
-// server.use("/", [auth, authenticationToken], routes);
+server.use("/", [auth, authenticationToken], routes);
 
 module.exports = server;
