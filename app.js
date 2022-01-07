@@ -7,7 +7,7 @@ require("dotenv").config();
 const indexUserModel = require("./src/db.js");
 const server = express();
 const routes = require("./src/routes/index");
-// const authenticationToken = require("./src/controllers/token-jimi");
+const authenticationToken = require("./src/controllers/token-jimi");
 const { JWT } = process.env;
 
 server.use(express.urlencoded({ extended: true }));
