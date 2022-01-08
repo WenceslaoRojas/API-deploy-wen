@@ -37,5 +37,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    coordArrivalTime: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    coordDepartureTime: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
 };
