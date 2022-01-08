@@ -45,6 +45,8 @@ const { User, LicensePlate, Post, Driver, Historial } = sequelize.models;
 Post.belongsTo(User);
 Post.belongsTo(Driver);
 Post.belongsTo(LicensePlate);
+User.hasOne(Historial);
+Post.hasOne(Historial);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

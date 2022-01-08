@@ -8,5 +8,9 @@ module.exports = (sequelize) => {
       autoIncrement: true,
       allowNull: false,
     },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
 };
