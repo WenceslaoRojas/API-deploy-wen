@@ -42,9 +42,7 @@ router.use("/post/listPost", listPost);
 
 /* --------------------------------Historial-------------------------------- */
 const listHistorial = require("./historial/historial-list");
-const createHistorial = require("./historial/create-historial");
 router.use("/historial/listHistorial", listHistorial);
-router.use("/historial/createHistorial", createHistorial);
 /* --------------------------------Historial-------------------------------- */
 
 /* --------------------------------JIMI API-------------------------------- */

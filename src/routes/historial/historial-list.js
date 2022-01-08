@@ -1,16 +1,14 @@
 const { Router } = require("express");
 const router = Router();
-const { Historial } = require("../../db.js");
+const { Post, User, Historial } = require("../../db");
 
 router.get("/", async function (req, res) {
   try {
-    let historial = await Historial.findAll(
-      { where: { user: req.params.user } },
-      { include: [User, Post] }
-    );
-    res.json(historial);
+    let historial = await Historial.findAll({ include: [User, Post] });
+    res.send({ message: historial });
   } catch (err) {
-    res.status(404).send(err);
+    console.log(err);
+    res.status(400).send({ error: err, message: "Error list history" });
   }
 });
 
