@@ -17,6 +17,9 @@ router.post("/", async (req, res) => {
         "Password must have at least 8 chars 1 Uppercase, 1 lowercase,1 number and 1 special character"
       );
     }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      return res.send("Invalid email");
+    }
 
     let salt = bcrypt.genSaltSync(10);
     let pass = bcrypt.hashSync(password, salt);
