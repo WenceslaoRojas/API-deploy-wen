@@ -99,14 +99,16 @@ router.post("/", async (req, res) => {
         `Nuevo reporte creado - MGF Logística`,
         `¡Hola ${foundUser.user}! Lo invitamos a revisar en la web https://jolly-banach-ec803d.netlify.app/ porque se creo un nuevo reporte sobre la hoja de ruta ${roadMap}.`
       );
-      return res
-        .status(201)
-        .send({ msg: "Post Was successfully created", email: respMail });
+      return res.status(201).send({
+        msg: "Post Was successfully created",
+        email: respMail,
+        post: postCreated,
+      });
     } catch (err) {
       console.log(err);
       return res
         .status(404)
-        .send({ err: "Post Created, Failed to send email" });
+        .send({ err: "Post Created, Failed to send email", post: postCreated });
     }
 
     /*------------------------------------ Send Email ------------------------------------*/
