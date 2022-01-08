@@ -30,8 +30,13 @@ router.post("/", async (req, res) => {
     !driver ||
     !operator
   )
-    return res.status(200).send({ msg: "missing fields to fill" });
+    return res.status(200).send({ msg: "Missing fields to fill" });
   try {
+    const foundPost = await Post.findOne({ where: { roadMap: roadMap } });
+    if (foundPost)
+      return res.send({
+        msg: `The roadmap number ${roadMap} already exists and must be unique.`,
+      });
     const foundUser = await User.findOne({
       where: { user: username },
     });

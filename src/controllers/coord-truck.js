@@ -58,14 +58,14 @@ module.exports = {
     //hago la petición y devuelvo la info a postman
     await axios("http://open.10000track.com/route/rest", requestOptions)
       .then((response) => {
-        if (!response.data.result[0].length)
+        if (!response.data.result[0].length || !response.data.result[0])
           return (coord = "coordinates not available");
         coord = `${response.data.result[0].lat} ${response.data.result[0].lng}`;
         return coord;
       })
       .catch(function (error) {
         console.log(error);
-        return "coordinates not available";
+        return (coord = "coordinates not available");
       });
     return coord;
   },
