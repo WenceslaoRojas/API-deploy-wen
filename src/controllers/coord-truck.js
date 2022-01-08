@@ -20,8 +20,8 @@ module.exports = {
       access_token: tokenPassword.token,
       imei: "862798050059324",
       map_type: "GOOGLE",
-      begin_time: new Date(begin).toISOString().slice(0, 19).replace("T", " "),
-      end_time: new Date(end).toISOString().slice(0, 19).replace("T", " "),
+      begin_time: begin,
+      end_time: end,
     };
     //str de parámetros ordenados alfabéticamente y unidos
     let temp = utf8.encode(
