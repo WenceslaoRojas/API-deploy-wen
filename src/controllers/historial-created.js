@@ -7,7 +7,7 @@ module.exports = {
       const foundUser = await User.findOne({
         where: { user: username },
       });
-
+      if (foundUser.admin !== "usuario") return;
       const foundPost = await Post.findOne({
         where: { roadMap: roadMap },
       });
@@ -15,6 +15,7 @@ module.exports = {
         return res.status(404).send({ msg: `${username} not found` });
       if (!foundPost)
         return res.status(404).send({ msg: `${roadMap} not found` });
+
       const foundUserByPk = await User.findByPk(foundUser.id);
       const foundPostByPk = await Post.findByPk(foundPost.id);
       const historialCreated = await Post.create({

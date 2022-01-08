@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
     !driver ||
     !operator
   )
-    return res.status(200).send({ msg: "faltan campos por rellenar" });
+    return res.status(200).send({ msg: "missing fields to fill" });
   try {
     const foundUser = await User.findOne({
       where: { user: username },

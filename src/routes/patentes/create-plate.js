@@ -4,7 +4,7 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   const { name } = req.body;
-
+  if (!name || name === "") return res.send({ msg: "It must contain a text" });
   try {
     const [license, created] = await LicensePlate.findOrCreate({
       where: {
