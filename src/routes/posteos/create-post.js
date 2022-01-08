@@ -64,11 +64,11 @@ router.post("/", async (req, res) => {
       author: operator,
       coordDepartureTime: await getCoords(
         departureTime,
-        moment(departureTime).subtract(1, "m").format("YYYY-MM-DD HH:MM:SS")
+        moment(departureTime).add(1, "m").format("YYYY-MM-DD HH:mm:SS")
       ),
       coordArrivalTime: await getCoords(
         arrivalTime,
-        moment(arrivalTime).subtract(1, "m").format("YYYY-MM-DD HH:MM:SS")
+        moment(arrivalTime).add(1, "m").format("YYYY-MM-DD HH:mm:SS")
       ),
     });
     /*------------------------------------ Set ForeignKey ------------------------------------*/

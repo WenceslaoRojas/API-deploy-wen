@@ -8,6 +8,7 @@ const { default: axios } = require("axios");
 
 module.exports = {
   getCoords: async function (begin, end) {
+    console.log("getCoords", begin, end);
     const tokenPassword = await Token.findByPk(1);
     // objeto de parámetros para el sing
     let paramsSing = {
@@ -58,8 +59,10 @@ module.exports = {
     //hago la petición y devuelvo la info a postman
     await axios("http://open.10000track.com/route/rest", requestOptions)
       .then((response) => {
-        if (!response.data.result[0].length || !response.data.result[0])
-          return (coord = "coordinates not available");
+        // console.log(response.data);
+        // if (!response.data.result[0].length || !response.data.result[0])
+        // return (coord = "coordinates not available");
+        // console.log("-------------------------------", response.data.result[0]);
         coord = `${response.data.result[0].lat} ${response.data.result[0].lng}`;
         return coord;
       })
@@ -70,3 +73,5 @@ module.exports = {
     return coord;
   },
 };
+
+// module.exports = getCoords;

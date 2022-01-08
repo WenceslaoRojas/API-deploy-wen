@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     departureTime: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     arrivalTime: {
