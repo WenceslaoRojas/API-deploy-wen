@@ -3,8 +3,18 @@ const router = Router();
 const { Post, User, Historial } = require("../../db");
 
 router.get("/", async function (req, res) {
+  const { username } = req.query;
   try {
-    let historial = await Historial.findAll({ include: [User, Post] });
+    const foundUser = await User.findOne({
+      where: { user: username },
+    });
+    if (foundUser.admin === "usuario")
+      return res
+        .status(404)
+        .send({ message: "The history is only for administrators" });
+    const historial = await Historial.findAll({
+      include: [{ model: User, attributes: { exclude: ["password"] } }, Post],
+    });
     res.send({ message: historial });
   } catch (err) {
     console.log(err);

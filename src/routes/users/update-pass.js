@@ -2,18 +2,19 @@ const { Router } = require("express");
 const router = Router();
 const bcrypt = require("bcryptjs");
 const { User } = require("../../db.js");
+const { sendMail } = require("../../controllers/email.js");
 
 router.put("/", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const user = await User.findOne({
+    const foundUser = await User.findOne({
       where: {
         user: username,
       },
     });
 
-    if (!user) {
+    if (!foundUser) {
       return res.send("Username does not exist.");
     }
     if (
@@ -29,12 +30,30 @@ router.put("/", async (req, res) => {
     let salt = bcrypt.genSaltSync(10);
     let pass = bcrypt.hashSync(password, salt);
 
-    await user.update({ password: pass });
+    await foundUser.update({ password: pass });
 
-    await user.save();
+    await foundUser.save();
 
-    if (user.password === pass) {
+    if (foundUser.password === pass) {
       return res.status(200).send("Password modified.");
+    }
+    try {
+      // envío mail confirmación
+      let respMail = await sendMail(
+        email,
+        `Actualización de contraseña - MGF Logística`,
+        `¡Hola ${foundUser.user}! Lo invitamos a revisar en la web https://jolly-banach-ec803d.netlify.app/ porque se actualizaron su datos: Usuario: ${foundUser.user}, contraseña: ${password}.`
+      );
+      return res.status(201).send({
+        msg: "Post Was successfully created",
+        email: respMail,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(404).send({
+        err: "Post Created, Failed to send email",
+        post: postCreated,
+      });
     }
   } catch (err) {
     res.status(404).send(err);

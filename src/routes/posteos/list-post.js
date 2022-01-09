@@ -8,13 +8,21 @@ router.get("/", async function (req, res) {
   try {
     if (admin === "true") {
       let allPostList = await Post.findAll({
-        include: [User, Driver, LicensePlate],
+        include: [
+          { model: User, attributes: { exclude: ["password"] } },
+          Driver,
+          LicensePlate,
+        ],
       });
       return res.send(allPostList);
     }
     const foundUser = await User.findOne({ where: { user: username } });
     let postList = await Post.findAll({
-      include: [User, Driver, LicensePlate],
+      include: [
+        { model: User, attributes: { exclude: ["password"] } },
+        Driver,
+        LicensePlate,
+      ],
       where: { userId: foundUser.id },
     });
 
