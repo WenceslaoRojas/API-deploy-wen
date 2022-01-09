@@ -15,7 +15,7 @@ router.get("/", async function (req, res) {
     const foundUser = await User.findOne({
       where: { user: username },
     });
-    if (foundUser.admin !== "usuario")
+    if (foundUser.admin === "usuario")
       return res
         .status(404)
         .send({ message: "The history is only for administrators" });
