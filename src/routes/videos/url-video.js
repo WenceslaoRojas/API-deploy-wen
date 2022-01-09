@@ -3,7 +3,6 @@ const router = Router();
 const { getUrl } = require("../../controllers/video-fire.js");
 // este modulo inicializa firebase
 const admin = require("./admin-firebase.js");
-const { createdHistorial } = require("../../controllers/historial-created");
 const { Post, User, Historial } = require("../../db");
 
 router.get("/", async function (req, res) {
