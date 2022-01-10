@@ -97,7 +97,7 @@ router.post("/", async (req, res) => {
       let respMail = await sendMail(
         foundUser.email,
         `Nuevo reporte creado - MGF Logística`,
-        `¡Hola ${foundUser.user}! Lo invitamos a revisar en la web https://jolly-banach-ec803d.netlify.app/ porque se creo un nuevo reporte sobre la hoja de ruta ${roadMap}.`
+        `¡Hola ${foundUser.user}! Lo invitamos a revisar en la web https://mgflogistica.netlify.app/ porque se creo un nuevo reporte sobre la hoja de ruta ${roadMap}.`
       );
       return res.status(201).send({
         msg: "Post Was successfully created",
