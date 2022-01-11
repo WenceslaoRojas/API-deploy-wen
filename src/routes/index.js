@@ -8,11 +8,13 @@ const deleted = require("./users/delete-user");
 const listUser = require("./users/list-user");
 const updatePass = require("./users/update-pass");
 const updateEmail = require("./users/update-email");
+const updateUsername = require("./users/update-username");
 router.use("/user/create", user);
 router.use("/user/delete", deleted);
 router.use("/user/list", listUser);
 router.use("/user/update/passWord", updatePass);
-router.use("/user/update/email", updateEmail);
+router.use("/user/create", user);
+router.use("/user/update/username", updateUsername);
 /* --------------------------------USERS-------------------------------- */
 
 /* --------------------------------DRIVERS-------------------------------- */
