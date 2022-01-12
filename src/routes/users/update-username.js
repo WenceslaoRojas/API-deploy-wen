@@ -35,7 +35,7 @@ router.put("/", async (req, res) => {
           `¡Hola ${foundUser.user}! Lo invitamos a revisar en la web https://mgflogistica.netlify.app/ porque se actualizaron su datos: Usuario: ${foundUser.user}, contraseña: ${foundUser.password}.`
         );
         return res.status(201).send({
-          msg: "Post Was successfully created",
+          msg: "Username was successfully update",
           email: respMail,
         });
       } catch (err) {
