@@ -11,7 +11,6 @@ const authenticationToken = require("./src/controllers/token-jimi");
 const { json } = require("sequelize/dist");
 const { JWT } = process.env;
 
-server.use(JSON.parse());
 server.use(express.urlencoded({ extended: true }));
 const auth = express();
 server.set("llave", JWT);
