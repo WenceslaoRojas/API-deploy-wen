@@ -64,8 +64,8 @@ module.exports = {
         });
       }
 
-      //se llama a la libreria para hacer la funcion de unir videos
-      // internamente ejecua el exe ffmpeg.exe
+      //se llama a la librería para hacer la función de unir videos
+      // internamente ejecuta el exe ffmpeg.exe
       let file = await videoStitch({
         ffmpeg_path: "ffmpeg",
         silent: false, // optional. if set to false, gives detailed output on console
