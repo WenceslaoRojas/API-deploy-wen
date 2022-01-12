@@ -15,6 +15,7 @@ router.use("/user/list", listUser);
 router.use("/user/update/passWord", updatePass);
 router.use("/user/create", user);
 router.use("/user/update/username", updateUsername);
+router.use("/user/update/email", updateEmail);
 /* --------------------------------USERS-------------------------------- */
 
 /* --------------------------------DRIVERS-------------------------------- */
