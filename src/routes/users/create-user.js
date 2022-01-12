@@ -28,6 +28,12 @@ router.post("/", async (req, res) => {
       return res.send("user must only have numbers and letters");
     }
 
+    let foundEmail = await User.findOne({ email: email });
+    if (foundEmail)
+      return res.send(
+        `The email: ${email} already exists in the database,please try another one.`
+      );
+
     let [instanceUser, Created] = await User.findOrCreate({
       where: { user: username },
       defaults: {
