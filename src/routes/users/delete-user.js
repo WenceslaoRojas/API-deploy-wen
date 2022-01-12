@@ -14,7 +14,7 @@ router.put("/", async function (req, res) {
     if (!foundUSer || !foundUSer.dataValues.active)
       return res
         .status(200)
-        .json({ msg: "The driver does not exist in the database" });
+        .json({ msg: "The user does not exist in the database" });
 
     await foundUSer.update({ active: false });
     res.status(200).send({ msg: `User: ${username} deleted successfully` });
