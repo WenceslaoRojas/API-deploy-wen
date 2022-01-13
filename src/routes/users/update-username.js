@@ -13,10 +13,17 @@ router.put("/", async (req, res) => {
         user: username,
       },
     });
-
+    const foundNewUsername = await User.findOne({
+      where: {
+        user: newUsername,
+      },
+    });
     if (!foundUser) {
       return res.send("User does not exist.");
     }
+    if (foundNewUsername)
+      return res.send("Username not available, try another.");
+
     if (!/^[A-Za-z0-9 ]+$/.test(newUsername)) {
       return res.send("Username does not accept special characters.");
     }
