@@ -7,6 +7,7 @@ const { Token } = require("../../db");
 const router = Router();
 
 router.post("/", async function (req, res) {
+  const { imei, begin_time, end_time } = req.body;
   const tokenPassword = await Token.findByPk(1);
   // objeto de parámetros para el sing
   let paramsSing = {
@@ -17,10 +18,10 @@ router.post("/", async function (req, res) {
     v: "1.0",
     sign_method: "md5",
     access_token: tokenPassword.token,
-    imei: "862798050059324",
+    imei: imei,
     map_type: "GOOGLE",
-    begin_time: "2021-12-13 18:12:00",
-    end_time: "2021-12-13 18:13:00",
+    begin_time: begin_time,
+    end_time: end_time,
   };
   //str de parámetros ordenados alfabéticamente y unidos
   let temp = utf8.encode(

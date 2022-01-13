@@ -8,6 +8,7 @@ const router = Router();
 const moment = require("moment");
 
 router.post("/", async function (req, res) {
+  const { imei, start_time, end_time } = req.body;
   const tokenPassword = await Token.findByPk(1);
 
   // objeto de parametros para el sing
@@ -19,11 +20,11 @@ router.post("/", async function (req, res) {
     v: "1.0",
     sign_method: "md5",
     access_token: tokenPassword.token,
-    imei: "862798050059324",
+    imei: imei,
     camera: "1",
     media_type: "2",
-    start_time: "2021-12-13 00:00:00",
-    end_time: "2021-12-13 23:00:00",
+    start_time: start_time,
+    end_time: end_time,
   };
   //str de parametros ordenados alfabeticamente y unidos
   let temp = utf8.encode(

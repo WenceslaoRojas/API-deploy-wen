@@ -7,6 +7,7 @@ const { Token } = require("../../db");
 const router = Router();
 
 router.post("/", async function (req, res) {
+  const { imei } = req.body;
   const tokenPassword = await Token.findByPk(1);
 
   // objeto de parametros para el sing
@@ -18,7 +19,7 @@ router.post("/", async function (req, res) {
     v: "1.0",
     sign_method: "md5",
     access_token: tokenPassword.token,
-    imei: "862798050059324",
+    imei: imei,
     type: "2",
   };
 
