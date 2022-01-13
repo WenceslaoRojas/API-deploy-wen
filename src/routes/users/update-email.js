@@ -16,7 +16,13 @@ router.put("/", async (req, res) => {
     if (!foundUser) {
       throw "Username does not exist.";
     }
-
+    const foundEmail = await User.findOne({
+      where: { email: email },
+    });
+    if (foundEmail)
+      return res.send(
+        `The email: ${email} already exists in the database,please try another one.`
+      );
     await foundUser.update({ email: email });
     try {
       // envío mail confirmación
